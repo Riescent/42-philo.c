@@ -19,7 +19,7 @@ bool	philosopher_eats(t_philosopher *philosopher)
 
 	if (take_forks(philosopher))
 		return (philosopher_dies(philosopher));
-	gettimeofday(&current_time, NULL);
+	current_time = get_current_time();
 	time_to_eat = current_time;
 	philosopher->time_to_die = current_time;
 	timeval_add_ms(&time_to_eat, philosopher->args[TIME_TO_EAT]);
@@ -72,7 +72,7 @@ static void	print_has_taken_a_fork(t_philosopher *philosopher)
 	struct timeval	current_time;
 	long long		timestamp;
 
-	gettimeofday(&current_time, NULL);
+	current_time = get_current_time();
 	timestamp = get_timestamp(philosopher, current_time);
 	print_state_change("%lli\t%i "YELLOW"has taken a fork\n"COLOR_RESET,
 		timestamp, philosopher);

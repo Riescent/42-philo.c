@@ -18,7 +18,7 @@ void	*philosopher_routine(void *philosopher_void)
 	nb_of_times_to_eat = philosopher->args[NUMBER_OF_TIME_TO_EAT];
 	pthread_mutex_lock(philosopher->execution_lock);
 	pthread_mutex_unlock(philosopher->execution_lock);
-	gettimeofday(&philosopher->start_time, NULL);
+	philosopher->start_time = get_current_time();
 	philosopher->time_to_die = philosopher->start_time;
 	timeval_add_ms(&philosopher->time_to_die, philosopher->args[TIME_TO_DIE]);
 	while (no_philosophers_are_dead(philosopher))

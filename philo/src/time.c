@@ -2,11 +2,19 @@
 
 #include "philosophers.h"
 
+#define NB_OF_MICROSECONDS_IN_A_SECOND 1000000
+
 struct timeval	get_current_time(void)
 {
 	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
+	if (current_time.tv_usec >= NB_OF_MICROSECONDS_IN_A_SECOND)
+	{
+		current_time.tv_sec += current_time.tv_usec
+				/ NB_OF_MICROSECONDS_IN_A_SECOND;
+		current_time.tv_usec %= NB_OF_MICROSECONDS_IN_A_SECOND;
+	}
 	return (current_time);
 }
 
@@ -19,15 +27,12 @@ long long	get_timestamp(const t_philosopher *philosopher,
 
 void timeval_add_ms(struct timeval *tv, const int n)
 {
-	long long	useconds = tv->tv_usec + n * 1000;
-
+	tv->tv_usec += n * 1000;
 	if (tv->tv_usec >= 1000000)
 	{
-		tv->tv_sec += useconds / 1000000;
-		tv->tv_usec = useconds % 1000000;
+		tv->tv_sec += tv->tv_usec / 1000000;
+		tv->tv_usec %= 1000000;
 	}
-	else
-		tv->tv_usec = useconds;
 }
 
 int timeval_compare(const struct timeval t1, const struct timeval t2)

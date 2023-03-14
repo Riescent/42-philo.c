@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "arguments.h"
+#include "philo_time.h"
 
 //static long long	adjust_time_to_usleep(long long time_to_usleep,
 //						const int multiplier);
@@ -13,7 +14,7 @@ void	sleep_till(const struct timeval goal, const int *args,
 	struct timeval	current_time;
 	long long		time_to_usleep;
 
-	gettimeofday(&current_time, NULL);
+	current_time = get_current_time();
 	time_to_usleep = (goal.tv_sec - current_time.tv_sec) * 1000000
 					 + (goal.tv_usec - current_time.tv_usec);
 //	if (philosopher_is_sleeping)
