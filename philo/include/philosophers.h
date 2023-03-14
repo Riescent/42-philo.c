@@ -18,6 +18,7 @@ typedef struct s_philosopher
 	bool			*philosopher_died;
 	pthread_mutex_t	*philosopher_died_mutex;
 	pthread_t		pthread;
+	pthread_mutex_t	*execution_lock;
 }	t_philosopher;
 
 void	run_philosopher(t_philosopher *philosophers, const int *args);

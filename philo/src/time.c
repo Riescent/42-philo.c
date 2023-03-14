@@ -1,5 +1,4 @@
 #include <sys/time.h>
-#include <unistd.h>
 
 #include "philosophers.h"
 
@@ -18,14 +17,17 @@ long long	get_timestamp(const t_philosopher *philosopher,
 		+ (current_time.tv_usec - philosopher->start_time.tv_usec) / 1000);
 }
 
-void timeval_add_ms(struct timeval *tv, int n)
+void timeval_add_ms(struct timeval *tv, const int n)
 {
-	tv->tv_usec += n * 1000;
+	long long	useconds = tv->tv_usec + n * 1000;
+
 	if (tv->tv_usec >= 1000000)
 	{
-		tv->tv_sec += tv->tv_usec / 1000000;
-		tv->tv_usec %= 1000000;
+		tv->tv_sec += useconds / 1000000;
+		tv->tv_usec = useconds % 1000000;
 	}
+	else
+		tv->tv_usec = useconds;
 }
 
 int timeval_compare(const struct timeval t1, const struct timeval t2)

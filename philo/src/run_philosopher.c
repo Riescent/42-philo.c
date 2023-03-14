@@ -15,18 +15,20 @@ void	run_philosopher(t_philosopher *philosophers, const int *args)
 {
 	int 			size;
 	int				i;
-	struct timeval	current_time;
-	struct timeval	time_to_die;
+	pthread_mutex_t	execution_lock;
+
 // TODO handle single philosopher
-	gettimeofday(&current_time, NULL);
-	time_to_die = current_time;
-	timeval_add_ms(&time_to_die, args[TIME_TO_DIE]);
+	if (pthread_mutex_init(&execution_lock, NULL) != 0)
+	{
+		printf("Failed to init execution_lock mutex\n");
+		return ;
+	}
+	pthread_mutex_lock(&execution_lock);
 	size = args[NUMBER_OF_PHILOSOPHERS];
 	i = -1;
 	while (++i < size)
 	{
-		philosophers[i].start_time = current_time;
-		philosophers[i].time_to_die = time_to_die;
+		philosophers[i].execution_lock = &execution_lock;
 		if (pthread_create(&philosophers[i].pthread, NULL, &philosopher_routine,
 				philosophers + i) != 0)
 		{
@@ -36,8 +38,10 @@ void	run_philosopher(t_philosopher *philosophers, const int *args)
 			break ;
 		}
 	}
+	pthread_mutex_unlock(&execution_lock);
 	while (size--)
 		pthread_join(philosophers[size].pthread, NULL);
+	pthread_mutex_destroy(&execution_lock);
 }
 
 static void	set_philosopher_died_to_true_to_stop_all_thread(
