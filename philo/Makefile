@@ -175,7 +175,9 @@ SRC =\
 
 
 DIR_INCS =\
-	include/
+	include/	\
+	include/tools
+
 
 INCLUDES =\
 	$(addprefix -I , $(DIR_INCS))

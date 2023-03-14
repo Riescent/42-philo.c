@@ -13,7 +13,7 @@ int	main(int argc, char **argv)
 
 	philosopher_died = false;
 	if (pthread_mutex_init(&philosopher_died_mutex, NULL) != 0)
-		return (ft_putstr_fd("Failed to init philosopher_died mutex\n",
+		return (ft_putstr_fd("Failed to init philosopher_died_mutex\n",
 				STDERR_FILENO), 1);
 	if (check_argument_count(argc) < 0 || fill_args(argc, argv, args) < 0)
 		return (2);

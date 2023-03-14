@@ -1,5 +1,6 @@
 #include <sys/time.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include "tools/ft_colors.h"
 
@@ -41,6 +42,7 @@ static bool	take_forks(t_philosopher *philosopher)
 {
 	while (true)
 	{
+		usleep(200);
 		if (timeval_compare(philosopher->time_to_die, get_current_time()) <= 0)
 			return (philosopher_dies(philosopher));
 		pthread_mutex_lock(&philosopher->right_fork_mutex);
