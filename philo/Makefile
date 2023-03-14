@@ -166,6 +166,7 @@ SRC =\
 	philosopher_routine/philosopher_routine.c	\
 	philosopher_routine/philosopher_sleeps.c	\
 	philosopher_routine/print_state_change.c	\
+	philosopher_routine/sleep_till.c			\
 \
 \
 	arguments.c			\

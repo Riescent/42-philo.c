@@ -28,6 +28,8 @@ void	print_state_change(const char *format, const long long timestamp,
 bool	philosopher_eats(t_philosopher *philosopher);
 bool	philosopher_sleeps(t_philosopher *philosopher);
 bool	philosopher_dies(t_philosopher *philosopher);
+void	sleep_till(const struct timeval goal, const int *args,
+			const bool philosopher_is_sleeping);
 
 t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 					pthread_mutex_t	*philosopher_died_mutex);
