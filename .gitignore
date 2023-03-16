@@ -2,6 +2,7 @@
 cmake-build-debug
 CMakeLists.txt
 .idea
+.nfs*
 
 # Prerequisites
 *.d

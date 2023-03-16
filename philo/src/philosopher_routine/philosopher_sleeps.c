@@ -8,10 +8,9 @@
 
 bool	philosopher_sleeps(t_philosopher *philosopher)
 {
-	struct timeval	current_time;
-	struct timeval	time_to_sleep;
+	const struct timeval	current_time = get_current_time();
+	struct timeval			time_to_sleep;
 
-	current_time = get_current_time();
 	print_state_change("%lli\t%i "BLACK_HIGH_INTENSITY"is sleeping\n"COLOR_RESET,
 			get_timestamp(philosopher, current_time), philosopher);
 	time_to_sleep = current_time;
