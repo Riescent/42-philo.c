@@ -11,7 +11,7 @@ struct timeval	get_current_time(void)
 	if (current_time.tv_usec >= NB_OF_USECONDS_IN_A_SECOND)
 	{
 		current_time.tv_sec += current_time.tv_usec
-							   / NB_OF_USECONDS_IN_A_SECOND;
+			/ NB_OF_USECONDS_IN_A_SECOND;
 		current_time.tv_usec %= NB_OF_USECONDS_IN_A_SECOND;
 	}
 	return (current_time);
