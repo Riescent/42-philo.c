@@ -29,11 +29,16 @@ void	run_philosopher(t_philosopher *philosophers, const int *args)
 	int				i;
 	pthread_mutex_t	execution_lock;
 
-// TODO handle single philosopher
 	if (pthread_mutex_init(&execution_lock, NULL) != 0)
 	{
 		printf("Failed to init execution_lock mutex\n");
 		return ;
+	}
+	if (args[NUMBER_OF_PHILOSOPHERS] == 1)
+	{
+		pthread_mutex_lock(&philosophers->right_fork_mutex);
+		philosophers->right_fork = true;
+		pthread_mutex_unlock(&philosophers->right_fork_mutex);
 	}
 	pthread_mutex_lock(&execution_lock);
 	size = args[NUMBER_OF_PHILOSOPHERS];
