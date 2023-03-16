@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <unistd.h>
 
 #include "ft_colors.h"
@@ -25,8 +24,9 @@ void	*philosopher_routine(void *philosopher_void)
 	{
 		if (philosopher_eats(philosopher))
 			return (NULL);
-		if (--nb_of_times_to_eat == 0)
-			return (NULL);
+		if (nb_of_times_to_eat != -1)
+			if (--nb_of_times_to_eat == 0)
+				return (NULL);
 		if (philosopher_sleeps(philosopher))
 			return (NULL);
 		print_state_change("%lli\t%i "PURPLE"is thinking\n"COLOR_RESET,
