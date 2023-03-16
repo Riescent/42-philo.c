@@ -161,6 +161,7 @@ SRC =\
 	philosopher/destroy_philosopher.c	\
 	philosopher/init_philosophers.c		\
 \
+	philosopher_routine/no_philosopher_died.c	\
 	philosopher_routine/philosopher_dies.c		\
 	philosopher_routine/philosopher_eats.c		\
 	philosopher_routine/philosopher_routine.c	\

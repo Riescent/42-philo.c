@@ -40,12 +40,12 @@ bool	philosopher_eats(t_philosopher *philosopher)
 		get_timestamp(philosopher, current_time), philosopher);
 	if (timeval_compare(philosopher->time_to_die, current_time) <= 0)
 	{
-		sleep_till(philosopher->time_to_die);
+		sleep_till(philosopher->time_to_die, philosopher);
 		philosopher_dies(philosopher);
 		let_go_of_forks(philosopher);
 		return (true);
 	}
-	sleep_till(time_to_eat);
+	sleep_till(time_to_eat, philosopher);
 	let_go_of_forks(philosopher);
 	return (false);
 }

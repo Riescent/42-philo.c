@@ -18,8 +18,6 @@
 #include "arguments.h"
 #include "philo_time.h"
 
-static bool	no_philosophers_are_dead(t_philosopher *philosopher);
-
 void	*philosopher_routine(void *philosopher_void)
 {
 	t_philosopher	*philosopher;
@@ -32,7 +30,7 @@ void	*philosopher_routine(void *philosopher_void)
 	philosopher->start_time = get_current_time();
 	philosopher->time_to_die = philosopher->start_time;
 	timeval_add_ms(&philosopher->time_to_die, philosopher->args[TIME_TO_DIE]);
-	while (no_philosophers_are_dead(philosopher))
+	while (no_philosophers_died(philosopher))
 	{
 		if (philosopher_eats(philosopher))
 			return (NULL);
@@ -43,16 +41,7 @@ void	*philosopher_routine(void *philosopher_void)
 			return (NULL);
 		print_state_change("%lli\t%i "PURPLE"is thinking\n"COLOR_RESET,
 			get_timestamp(philosopher, get_current_time()), philosopher);
+		usleep(300);
 	}
 	return (NULL);
-}
-
-static bool	no_philosophers_are_dead(t_philosopher *philosopher)
-{
-	bool	return_value;
-
-	pthread_mutex_lock(philosopher->philosopher_died_mutex);
-	return_value = *philosopher->philosopher_died == false;
-	pthread_mutex_unlock(philosopher->philosopher_died_mutex);
-	return (return_value);
 }

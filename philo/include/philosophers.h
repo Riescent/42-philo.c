@@ -35,13 +35,15 @@ typedef struct s_philosopher
 
 void			run_philosopher(t_philosopher *philosophers);
 
+bool			no_philosophers_died(const t_philosopher *philosopher);
 void			*philosopher_routine(void *philosopher_void);
 void			print_state_change(const char *format,
 					const long long timestamp, t_philosopher *philosopher);
 bool			philosopher_eats(t_philosopher *philosopher);
 bool			philosopher_sleeps(t_philosopher *philosopher);
 bool			philosopher_dies(t_philosopher *philosopher);
-void			sleep_till(const struct timeval goal);
+void			sleep_till(const struct timeval goal,
+					const t_philosopher *philosopher);
 
 t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 					pthread_mutex_t	*philosopher_died_mutex);
