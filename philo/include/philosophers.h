@@ -33,7 +33,7 @@ typedef struct s_philosopher
 	pthread_mutex_t	*execution_lock;
 }	t_philosopher;
 
-void			run_philosopher(t_philosopher *philosophers, const int *args);
+void			run_philosopher(t_philosopher *philosophers);
 
 void			*philosopher_routine(void *philosopher_void);
 void			print_state_change(const char *format,

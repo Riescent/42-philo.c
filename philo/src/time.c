@@ -56,7 +56,5 @@ int	timeval_compare(const struct timeval t1, const struct timeval t2)
 		return (1);
 	if (t1.tv_usec < t2.tv_usec)
 		return (-1);
-	if (t1.tv_usec > t2.tv_usec)
-		return (1);
-	return (0);
+	return (t1.tv_usec > t2.tv_usec);
 }

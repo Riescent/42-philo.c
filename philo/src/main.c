@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("init_philosophers() failed\n", STDERR_FILENO);
 		return (3);
 	}
-	run_philosopher(philosophers, args);
+	run_philosopher(philosophers);
 	destroy_philosophers(philosophers, args[NUMBER_OF_PHILOSOPHERS]);
 	pthread_mutex_destroy(&philosopher_died_mutex);
 	return (0);
