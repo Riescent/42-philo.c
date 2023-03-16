@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher_sleeps.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 07:15:11 by vfries            #+#    #+#             */
+/*   Updated: 2023/03/16 07:15:11 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 
 #include "ft_colors.h"
@@ -12,7 +24,7 @@ bool	philosopher_sleeps(t_philosopher *philosopher)
 	struct timeval			time_to_sleep;
 
 	print_state_change("%lli\t%i "BLACK_HIGH_INTENSITY"is sleeping\n"COLOR_RESET,
-			get_timestamp(philosopher, current_time), philosopher);
+		get_timestamp(philosopher, current_time), philosopher);
 	time_to_sleep = current_time;
 	timeval_add_ms(&time_to_sleep, philosopher->args[TIME_TO_SLEEP]);
 	if (timeval_compare(philosopher->time_to_die, time_to_sleep) <= 0)

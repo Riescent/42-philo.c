@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arguments.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 07:15:00 by vfries            #+#    #+#             */
+/*   Updated: 2023/03/16 07:15:00 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <errno.h>
 #include <limits.h>
 
@@ -11,10 +23,10 @@ int	check_argument_count(int argc)
 	{
 		ft_putstr_fd("Bad number of arguments:\n", STDERR_FILENO);
 		ft_putstr_fd("\t./philo number_of_philosophers time_to_die ",
-					 STDERR_FILENO);
+			STDERR_FILENO);
 		ft_putstr_fd("time_to_eat time_to_sleep ", STDERR_FILENO);
 		ft_putstr_fd("[number_of_times_each_philosopher_must_eat]\n",
-					 STDERR_FILENO);
+			STDERR_FILENO);
 		return (-1);
 	}
 	return (0);

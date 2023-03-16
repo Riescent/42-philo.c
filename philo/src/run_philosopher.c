@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_philosopher.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 07:14:55 by vfries            #+#    #+#             */
+/*   Updated: 2023/03/16 07:14:55 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <pthread.h>
 #include <sys/time.h>
@@ -13,7 +25,7 @@ static void	set_philosopher_died_to_true_to_stop_all_thread(
 
 void	run_philosopher(t_philosopher *philosophers, const int *args)
 {
-	int 			size;
+	int				size;
 	int				i;
 	pthread_mutex_t	execution_lock;
 

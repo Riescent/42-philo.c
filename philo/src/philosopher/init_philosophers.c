@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_philosophers.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 07:15:26 by vfries            #+#    #+#             */
+/*   Updated: 2023/03/16 07:15:26 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <pthread.h>
 
@@ -17,7 +29,7 @@ t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 					pthread_mutex_t	*philosopher_died_mutex)
 {
 	t_philosopher	*philosophers;
-	int 			i;
+	int				i;
 
 	philosophers = malloc(sizeof(*philosophers) * args[0]);
 	if (philosophers == NULL)

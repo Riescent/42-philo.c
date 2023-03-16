@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/16 07:14:57 by vfries            #+#    #+#             */
+/*   Updated: 2023/03/16 07:14:58 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pthread.h>
 #include "this_is_not_my_libft.h"
 
@@ -7,7 +19,7 @@
 int	main(int argc, char **argv)
 {
 	int				args[5];
-	t_philosopher 	*philosophers;
+	t_philosopher	*philosophers;
 	bool			philosopher_died;
 	pthread_mutex_t	philosopher_died_mutex;
 
