@@ -5,6 +5,9 @@
 
 # include "philosophers.h"
 
+# define NB_OF_USECONDS_IN_A_SECOND 1000000
+# define NB_OF_USECONDS_IN_A_MILLISECOND 1000
+
 struct timeval	get_current_time(void);
 long long		get_timestamp(const t_philosopher *philosopher,
 					const struct timeval current_time);
