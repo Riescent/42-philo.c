@@ -40,12 +40,16 @@ long long	get_timestamp(const t_philosopher *philosopher,
 
 void	timeval_add_ms(struct timeval *tv, const int number_of_ms_to_add)
 {
-	tv->tv_usec += number_of_ms_to_add * NB_OF_USECONDS_IN_A_MILLISECOND;
-	if (tv->tv_usec >= NB_OF_USECONDS_IN_A_SECOND)
+	const unsigned long long	new_tv_usec = tv->tv_usec + (number_of_ms_to_add
+			* (long long)NB_OF_USECONDS_IN_A_MILLISECOND);
+
+	if (new_tv_usec >= NB_OF_USECONDS_IN_A_SECOND)
 	{
-		tv->tv_sec += tv->tv_usec / NB_OF_USECONDS_IN_A_SECOND;
-		tv->tv_usec %= NB_OF_USECONDS_IN_A_SECOND;
+		tv->tv_sec += new_tv_usec / NB_OF_USECONDS_IN_A_SECOND;
+		tv->tv_usec = new_tv_usec % NB_OF_USECONDS_IN_A_SECOND;
 	}
+	else
+		tv->tv_usec = new_tv_usec;
 }
 
 int	timeval_compare(const struct timeval t1, const struct timeval t2)
