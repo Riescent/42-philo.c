@@ -54,7 +54,7 @@ static bool	take_forks(t_philosopher *philosopher)
 {
 	while (true)
 	{
-		usleep(200);
+		usleep(200 * (philosopher->id % 2) + 300 * (philosopher->id % 2 == 0));
 		if (timeval_compare(philosopher->time_to_die, get_current_time()) <= 0)
 			return (philosopher_dies(philosopher));
 		pthread_mutex_lock(&philosopher->right_fork_mutex);
