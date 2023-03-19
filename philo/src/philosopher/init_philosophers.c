@@ -31,11 +31,11 @@ t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 	t_philosopher	*philosophers;
 	int				i;
 
-	philosophers = malloc(sizeof(*philosophers) * args[0]);
+	philosophers = malloc(sizeof(*philosophers) * args[NUMBER_OF_PHILOSOPHERS]);
 	if (philosophers == NULL)
 		return (NULL);
 	i = -1;
-	while (++i < args[0])
+	while (++i < args[NUMBER_OF_PHILOSOPHERS])
 	{
 		if (init_philosopher(philosophers + i, args, i + 1) < 0)
 		{
