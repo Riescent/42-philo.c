@@ -31,7 +31,7 @@ void	run_philosopher(t_philosopher *philosophers)
 
 	if (pthread_mutex_init(&execution_lock, NULL) != 0)
 	{
-		printf("Failed to init execution_lock mutex\n");
+		ft_putstr_fd("Failed to init execution_lock mutex\n", STDERR_FILENO);
 		return ;
 	}
 	pthread_mutex_lock(&execution_lock);
@@ -74,5 +74,5 @@ static void	failed_to_start_all_philosophers(t_philosopher *philosopher)
 	pthread_mutex_lock(philosopher->philosopher_died_mutex);
 	*philosopher->philosopher_died = true;
 	pthread_mutex_unlock(philosopher->philosopher_died_mutex);
-	printf("Failed to start all threads\n");
+	ft_putstr_fd("Failed to start all threads\n", STDERR_FILENO);
 }
