@@ -27,11 +27,6 @@ bool	philosopher_sleeps(t_philosopher *philosopher)
 		get_timestamp(philosopher, current_time), philosopher->id);
 	time_to_sleep = current_time;
 	timeval_add_ms(&time_to_sleep, philosopher->args[TIME_TO_SLEEP]);
-	if (timeval_compare(philosopher->time_to_die, time_to_sleep) <= 0)
-	{
-		sleep_till(philosopher->time_to_die);
-		return (philosopher_dies(philosopher));
-	}
 	sleep_till(time_to_sleep);
 	return (false);
 }

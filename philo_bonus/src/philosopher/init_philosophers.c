@@ -20,7 +20,7 @@
 #include "philosopher_semaphores.h"
 #include "arguments.h"
 
-static void	init_philosopher(t_philosopher	*philosopher, const int *args,
+static int	init_philosopher(t_philosopher	*philosopher, const int *args,
 				const int id, sem_t *forks);
 
 t_philosopher	*init_philosophers(const int *args)
@@ -40,14 +40,22 @@ t_philosopher	*init_philosophers(const int *args)
 	}
 	i = -1;
 	while (++i < args[NUMBER_OF_PHILOSOPHERS])
-		init_philosopher(philosophers + i, args, i + 1, forks);
+	{
+		if (init_philosopher(philosophers + i, args, i + 1, forks) < 0)
+			ft_putstr_fd("handle error\n", STDERR_FILENO); // TODO
+	}
 	return (philosophers);
 }
 
-static void	init_philosopher(t_philosopher	*philosopher, const int *args,
+static int	init_philosopher(t_philosopher	*philosopher, const int *args,
 				const int id, sem_t *forks)
 {
+	philosopher->time_to_die_semaphore = sem_open(TIME_TO_DIE_SEMAPHORE,
+			O_CREAT, 0660, 1);
+	if (philosopher->time_to_die_semaphore == SEM_FAILED)
+		return (-1);
 	philosopher->id = id;
 	philosopher->args = args;
 	philosopher->forks = forks;
+	return (0);
 }

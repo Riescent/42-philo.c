@@ -5,6 +5,7 @@
 # define EXECUTION_SEMAPHORE "execution_semaphore"
 # define PHILOSOPHER_DIED_SEMAPHORE "philosopher_died"
 # define SHOULD_KILL_ALL_PHILOSOPHERS_SEMAPHORE "should_kill_all_philosophers"
+# define TIME_TO_DIE_SEMAPHORE "time_to_die"
 
 void	unlink_all_semaphores(void);
 

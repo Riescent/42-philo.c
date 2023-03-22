@@ -26,6 +26,7 @@ typedef struct s_philosopher
 	sem_t			*forks;
 	struct timeval	start_time;
 	struct timeval	time_to_die;
+	sem_t			*time_to_die_semaphore;
 	pid_t			philosopher_pid;
 	sem_t			*execution_semaphore;
 	sem_t			*should_kill_all_philosophers;
@@ -34,7 +35,7 @@ typedef struct s_philosopher
 
 void			run_philosopher(t_philosopher *philosophers);
 
-bool			philosopher_dies(t_philosopher *philosopher);
+int				start_death_checker(t_philosopher *philosopher);
 int				philosopher_routine(t_philosopher *philosopher);
 bool			philosopher_eats(t_philosopher *philosopher);
 bool			philosopher_sleeps(t_philosopher *philosopher);
