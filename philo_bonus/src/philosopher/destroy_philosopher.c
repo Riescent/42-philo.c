@@ -23,5 +23,5 @@ void	destroy_philosophers(t_philosopher *philosophers, int size)
 
 void	destroy_philosopher(t_philosopher *philosopher)
 {
-	(void)philosopher;
+	sem_close(philosopher->time_to_die_semaphore);
 }
