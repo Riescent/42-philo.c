@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:14:55 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:14:55 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 15:25:09 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	run_philosopher(t_philosopher *philosophers)
 	philosophers->should_kill_all_philosophers = sem_open(
 			SHOULD_KILL_ALL_PHILOSOPHERS_SEMAPHORE, O_CREAT, 0660, 0);
 	philosophers->philosopher_died = sem_open(PHILOSOPHER_DIED_SEMAPHORE,
-		O_CREAT, 0660, 1);
+			O_CREAT, 0660, 1);
 	if (execution_semaphore == SEM_FAILED
 		|| philosophers->philosopher_died == SEM_FAILED
 		|| philosophers->should_kill_all_philosophers == SEM_FAILED)
@@ -58,7 +58,7 @@ void	run_philosopher(t_philosopher *philosophers)
 	if (size == philosophers->args[NUMBER_OF_PHILOSOPHERS])
 	{
 		if (pthread_create(&philosopher_death_checker, NULL,
-			&kill_all_process_when_one_dies, philosophers) != 0)
+				&kill_all_process_when_one_dies, philosophers) != 0)
 		{
 			sem_close(execution_semaphore);
 			sem_close(philosophers->should_kill_all_philosophers);

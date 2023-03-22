@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:13 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:15:14 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 15:29:00 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	philosopher_routine(t_philosopher *philosopher)
 		return (free_everything(philosopher), 2);
 	philosopher_eats(philosopher);
 	while (philosopher_has_eaten_the_asked_amount_of_time(
-		&number_of_times_to_eat) == false)
+			&number_of_times_to_eat) == false)
 	{
 		philosopher_sleeps(philosopher);
 		printf("%lli\t%i "PURPLE"is thinking\n"COLOR_RESET,

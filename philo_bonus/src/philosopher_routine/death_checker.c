@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   death_checker.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/22 15:29:09 by vfries            #+#    #+#             */
+/*   Updated: 2023/03/22 15:29:19 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 
 #include "ft_colors.h"
@@ -13,7 +25,7 @@ int	start_death_checker(t_philosopher *philosopher)
 	pthread_t	death_checker_thread;
 
 	if (pthread_create(&death_checker_thread, NULL,
-		&death_checker, philosopher) != 0)
+			&death_checker, philosopher) != 0)
 	{
 		sem_wait(philosopher->philosopher_died);
 		printf(RED"Failed to start death checker for philosopher %d\n%s",
@@ -53,6 +65,6 @@ static void	kill_philosopher(t_philosopher *philosopher)
 {
 	sem_wait(philosopher->philosopher_died);
 	printf("%lli\t%i "RED"died\n"COLOR_RESET,
-			get_timestamp(philosopher, get_current_time()), philosopher->id);
+		get_timestamp(philosopher, get_current_time()), philosopher->id);
 	sem_post(philosopher->should_kill_all_philosophers);
 }
