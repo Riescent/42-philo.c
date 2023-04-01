@@ -170,9 +170,13 @@ SRC =\
 	philosopher_routine/sleep_till.c			\
 \
 \
+	run_philosophers/error_in_run_philosopher.c	\
+	run_philosophers/philosopher_killer.c		\
+	run_philosophers/run_philosopher.c			\
+\
+\
 	arguments.c				\
 	main.c					\
-	run_philosopher.c		\
 	time.c					\
 	unlink_all_semaphores.c
 

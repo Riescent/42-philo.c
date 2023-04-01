@@ -33,6 +33,11 @@ typedef struct s_philosopher
 	sem_t			*philosopher_died;
 }	t_philosopher;
 
+void			error_in_run_philosopher(t_philosopher *philosophers,
+					int index_at_which_philosopher_initialisation_failed,
+					int size, char *error_message);
+int				init_philosopher_killer(t_philosopher *philosophers, int size,
+					sem_t *execution_semaphore);
 void			run_philosopher(t_philosopher *philosophers);
 
 int				start_death_checker(t_philosopher *philosopher);
