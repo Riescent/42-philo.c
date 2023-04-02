@@ -22,6 +22,7 @@ void	*philosopher_routine(void *philosopher_void)
 {
 	t_philosopher	*philosopher;
 	int				nb_of_times_to_eat;
+	struct timeval	tmp;
 
 	philosopher = philosopher_void;
 	nb_of_times_to_eat = philosopher->args[NUMBER_OF_TIME_TO_EAT];
@@ -30,6 +31,13 @@ void	*philosopher_routine(void *philosopher_void)
 	philosopher->start_time = get_current_time();
 	philosopher->time_to_die = philosopher->start_time;
 	timeval_add_ms(&philosopher->time_to_die, philosopher->args[TIME_TO_DIE]);
+	if (philosopher->id % 2
+		&& philosopher->args[TIME_TO_EAT] < philosopher->args[TIME_TO_DIE])
+	{
+		tmp = philosopher->start_time;
+		timeval_add_ms(&tmp, philosopher->args[TIME_TO_EAT] / 2);
+		sleep_till(tmp, philosopher);
+	}
 	while (no_philosophers_died(philosopher))
 	{
 		if (philosopher_eats(philosopher))

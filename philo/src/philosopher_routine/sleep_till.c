@@ -23,7 +23,7 @@ void	sleep_till(const struct timeval goal, const t_philosopher *philosopher)
 	while (timeval_compare(goal, current_time) > 0
 		&& no_philosophers_died(philosopher))
 	{
-		usleep(100);
+		usleep(5);
 		current_time = get_current_time();
 	}
 }
