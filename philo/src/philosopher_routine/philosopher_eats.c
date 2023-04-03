@@ -51,12 +51,14 @@ static int	take_forks(t_philosopher *philosopher)
 	if (philosopher->id % 2)
 	{
 		pthread_mutex_lock(&philosopher->right_fork_mutex);
+		philosopher->right_fork_is_locked = true;
 		pthread_mutex_lock(philosopher->left_fork_mutex);
 	}
 	else
 	{
 		pthread_mutex_lock(philosopher->left_fork_mutex);
 		pthread_mutex_lock(&philosopher->right_fork_mutex);
+		philosopher->right_fork_is_locked = true;
 	}
 	return (print_has_taken_a_fork(philosopher));
 }
@@ -79,5 +81,6 @@ static int	print_has_taken_a_fork(t_philosopher *philosopher)
 static void	let_go_of_forks(t_philosopher *philosopher)
 {
 	pthread_mutex_unlock(&philosopher->right_fork_mutex);
+	philosopher->right_fork_is_locked = false;
 	pthread_mutex_unlock(philosopher->left_fork_mutex);
 }

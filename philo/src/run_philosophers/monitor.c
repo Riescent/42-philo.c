@@ -25,7 +25,11 @@ void	start_monitoring(t_philosopher *philosophers)
 	pthread_join(monitor, NULL);
 	size = philosophers->args[NUMBER_OF_PHILOSOPHERS];
 	while (size--)
+	{
 		pthread_join(philosophers[size].pthread, NULL);
+		if (philosophers[size].right_fork_is_locked)
+			pthread_mutex_unlock(&philosophers[size].right_fork_mutex);
+	}
 }
 
 static void	*monitor_routine(void *philosophers_void)
