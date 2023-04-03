@@ -51,14 +51,17 @@ t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 static int	init_philosopher(t_philosopher	*philosopher, const int *args,
 				const int id)
 {
-	if (pthread_mutex_init(&philosopher->right_fork_mutex, NULL) != 0)
+	if (pthread_mutex_init(&philosopher->right_fork_mutex, NULL) != 0
+		|| pthread_mutex_init(&philosopher->time_to_die_mutex, NULL) != 0
+		|| pthread_mutex_init(&philosopher->nb_of_times_to_eat_mutex, NULL)
+			!= 0)
 	{
 		destroy_philosopher(philosopher);
 		return (-1);
 	}
 	philosopher->id = id;
 	philosopher->args = args;
-	philosopher->right_fork = false;
+	philosopher->nb_of_times_to_eat = args[NUMBER_OF_TIME_TO_EAT];
 	return (0);
 }
 
@@ -66,7 +69,7 @@ static void	init_left_forks_and_philosopher_died(t_philosopher *philosophers,
 				bool *philosopher_died, pthread_mutex_t	*philosopher_died_mutex,
 				const int last_philosopher_index)
 {
-	int			i;
+	int	i;
 
 	i = -1;
 	while (++i < last_philosopher_index)
@@ -74,11 +77,9 @@ static void	init_left_forks_and_philosopher_died(t_philosopher *philosophers,
 		philosophers[i].philosopher_died = philosopher_died;
 		philosophers[i].philosopher_died_mutex = philosopher_died_mutex;
 		philosophers[i + 1].left_fork_mutex = &philosophers[i].right_fork_mutex;
-		philosophers[i + 1].left_fork = &philosophers[i].right_fork;
 	}
 	philosophers[last_philosopher_index].philosopher_died = philosopher_died;
 	philosophers[last_philosopher_index].philosopher_died_mutex
 		= philosopher_died_mutex;
 	philosophers[0].left_fork_mutex = &philosophers[i].right_fork_mutex;
-	philosophers[0].left_fork = &philosophers[i].right_fork;
 }

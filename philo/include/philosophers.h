@@ -21,29 +21,28 @@ typedef struct s_philosopher
 {
 	int				id;
 	const int		*args;
-	bool			right_fork;
 	pthread_mutex_t	right_fork_mutex;
-	bool			*left_fork;
 	pthread_mutex_t	*left_fork_mutex;
 	struct timeval	start_time;
 	struct timeval	time_to_die;
+	pthread_mutex_t	time_to_die_mutex;
 	bool			*philosopher_died;
 	pthread_mutex_t	*philosopher_died_mutex;
 	pthread_t		pthread;
 	pthread_mutex_t	*execution_lock;
+	int 			nb_of_times_to_eat;
+	pthread_mutex_t	nb_of_times_to_eat_mutex;
 }	t_philosopher;
 
+void			start_monitoring(t_philosopher *philosophers);
 void			run_philosopher(t_philosopher *philosophers);
 
-bool			no_philosophers_died(const t_philosopher *philosopher);
 void			*philosopher_routine(void *philosopher_void);
-void			print_state_change(const char *format,
+int				print_state_change(const char *format,
 					const long long timestamp, t_philosopher *philosopher);
-bool			philosopher_eats(t_philosopher *philosopher);
-bool			philosopher_sleeps(t_philosopher *philosopher);
-bool			philosopher_dies(t_philosopher *philosopher);
-void			sleep_till(const struct timeval goal,
-					const t_philosopher *philosopher);
+int 			philosopher_eats(t_philosopher *philosopher);
+int 			philosopher_sleeps(t_philosopher *philosopher);
+void			sleep_till(const struct timeval goal);
 
 t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 					pthread_mutex_t	*philosopher_died_mutex);

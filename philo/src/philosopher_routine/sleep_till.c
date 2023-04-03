@@ -15,13 +15,12 @@
 
 #include "philo_time.h"
 
-void	sleep_till(const struct timeval goal, const t_philosopher *philosopher)
+void	sleep_till(const struct timeval goal)
 {
 	struct timeval	current_time;
 
 	current_time = get_current_time();
-	while (timeval_compare(goal, current_time) > 0
-		&& no_philosophers_died(philosopher))
+	while (timeval_compare(goal, current_time) > 0)  // TODO need to check if philosopher died
 	{
 		usleep(5);
 		current_time = get_current_time();
