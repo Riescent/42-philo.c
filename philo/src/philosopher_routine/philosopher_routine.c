@@ -43,6 +43,6 @@ void	*philosopher_routine(void *philosopher_void)
 				get_timestamp(philosopher, get_current_time()), philosopher)
 			< 0)
 			return (NULL);
-		// usleep(300);
+		usleep(300);
 	}
 }

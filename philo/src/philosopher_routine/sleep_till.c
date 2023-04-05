@@ -39,5 +39,5 @@ long long	get_time_to_usleep(const struct timeval current_time,
 	const long long sec_to_usleep = goal.tv_sec - current_time.tv_sec;
 
 	return ((sec_to_usleep * NB_OF_USECONDS_IN_A_SECOND + u_sec_to_usleep)
-		* 8 / 10);
+		* 9 / 10);
 }
