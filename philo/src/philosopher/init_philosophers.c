@@ -61,7 +61,6 @@ static int	init_philosopher(t_philosopher	*philosopher, const int *args,
 	}
 	philosopher->id = id;
 	philosopher->args = args;
-	philosopher->right_fork_is_locked = false;
 	philosopher->nb_of_times_to_eat = args[NUMBER_OF_TIME_TO_EAT];
 	return (0);
 }

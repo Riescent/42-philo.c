@@ -27,11 +27,10 @@ void	start_monitoring(t_philosopher *philosophers)
 	while (size--)
 	{
 		pthread_join(philosophers[size].pthread, NULL);
-		if (philosophers[size].right_fork_is_locked)
-			pthread_mutex_unlock(&philosophers[size].right_fork_mutex);
+		// if (philosophers[size].right_fork_is_locked)
+		// 	pthread_mutex_unlock(&philosophers[size].right_fork_mutex);
 	}
 }
-
 static void	*monitor_routine(void *philosophers_void)
 {
 	const t_philosopher	*philosophers = philosophers_void;
@@ -71,7 +70,7 @@ static bool	handle_philosopher_death(t_philosopher *philosophers)
 	}
 	if (times_to_eat_remaining == 0)
 	{
-		stop_philosophers(philosophers + i);
+		stop_philosophers(philosophers);
 		return (true);
 	}
 	return (false);

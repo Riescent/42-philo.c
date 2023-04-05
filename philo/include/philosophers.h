@@ -22,7 +22,6 @@ typedef struct s_philosopher
 	int				id;
 	const int		*args;
 	pthread_mutex_t	right_fork_mutex;
-	bool			right_fork_is_locked;
 	pthread_mutex_t	*left_fork_mutex;
 	struct timeval	start_time;
 	struct timeval	time_to_die;

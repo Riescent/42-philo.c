@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:16 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:15:16 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/03 04:13:44 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	philosopher_eats(t_philosopher *philosopher)
 	struct timeval	time_to_eat;
 
 	if (take_forks(philosopher))
+	{
+		let_go_of_forks(philosopher);
 		return (-1);
+	}
 	current_time = get_current_time();
 	time_to_eat = current_time;
 	pthread_mutex_lock(&philosopher->time_to_die_mutex);
@@ -39,8 +42,18 @@ int	philosopher_eats(t_philosopher *philosopher)
 	pthread_mutex_unlock(&philosopher->time_to_die_mutex);
 	timeval_add_ms(&time_to_eat, philosopher->args[TIME_TO_EAT]);
 	if (print_state_change("%lli\t%i "GREEN"is eating\n"COLOR_RESET,
-		get_timestamp(philosopher, current_time), philosopher) < 0)
+			get_timestamp(philosopher, current_time), philosopher) < 0)
+	{
+		let_go_of_forks(philosopher);
 		return (-1);
+	}
+	if (philosopher->args[NUMBER_OF_TIME_TO_EAT] != -1)
+	{
+		pthread_mutex_lock(&philosopher->nb_of_times_to_eat_mutex);
+		if (philosopher->nb_of_times_to_eat > 0)
+			philosopher->nb_of_times_to_eat--;
+		pthread_mutex_unlock(&philosopher->nb_of_times_to_eat_mutex);
+	}
 	sleep_till(time_to_eat);
 	let_go_of_forks(philosopher);
 	return (0);
@@ -51,14 +64,12 @@ static int	take_forks(t_philosopher *philosopher)
 	if (philosopher->id % 2)
 	{
 		pthread_mutex_lock(&philosopher->right_fork_mutex);
-		philosopher->right_fork_is_locked = true;
 		pthread_mutex_lock(philosopher->left_fork_mutex);
 	}
 	else
 	{
 		pthread_mutex_lock(philosopher->left_fork_mutex);
 		pthread_mutex_lock(&philosopher->right_fork_mutex);
-		philosopher->right_fork_is_locked = true;
 	}
 	return (print_has_taken_a_fork(philosopher));
 }
@@ -81,6 +92,5 @@ static int	print_has_taken_a_fork(t_philosopher *philosopher)
 static void	let_go_of_forks(t_philosopher *philosopher)
 {
 	pthread_mutex_unlock(&philosopher->right_fork_mutex);
-	philosopher->right_fork_is_locked = false;
 	pthread_mutex_unlock(philosopher->left_fork_mutex);
 }

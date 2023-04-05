@@ -23,7 +23,7 @@ int	print_state_change(const char *format, const long long timestamp,
 		pthread_mutex_unlock(philosopher->philosopher_died_mutex);
 		return (-1);
 	}
-	pthread_mutex_unlock(philosopher->philosopher_died_mutex);
 	printf(format, timestamp, philosopher->id);
+	pthread_mutex_unlock(philosopher->philosopher_died_mutex);
 	return (0);
 }
