@@ -37,7 +37,7 @@ static void	*monitor_routine(void *philosophers_void)
 		timeval_add_ms(&tmp, philosophers->args[TIME_TO_EAT] / 2);
 	else
 		timeval_add_ms(&tmp, philosophers->args[TIME_TO_DIE] / 2);
-	sleep_till(tmp);
+	sleep_till(tmp, philosophers);
 	while (true)
 		if (handle_philosopher_death(philosophers_void))
 			return (NULL);

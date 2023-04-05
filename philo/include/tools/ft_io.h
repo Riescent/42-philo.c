@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 11:00:10 by vfries            #+#    #+#             */
-/*   Updated: 2023/02/06 08:46:10 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 19:34:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 void	ft_print_position_in_code(const char *file, const char *function,
 			const int line);
-void	ft_putchar_fd(const char c, int fd);
-void	ft_putendl_fd(const char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(const char *s, int fd);
+int		ft_putchar_fd(const char c, int fd);
+int		ft_putendl_fd(const char *s, int fd);
+int		ft_putnbr_fd(int n, int fd);
+int		ft_putstr_fd(const char *s, int fd);
 
 // Bonus
-void	ft_putstr(const char *s);
+int		ft_putstr(const char *s);
 int		ft_printf(const char *format, ...);
 
 #endif

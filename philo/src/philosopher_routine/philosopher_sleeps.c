@@ -28,6 +28,6 @@ int	philosopher_sleeps(t_philosopher *philosopher)
 		return (-1);
 	time_to_sleep = current_time;
 	timeval_add_ms(&time_to_sleep, philosopher->args[TIME_TO_SLEEP]);
-	sleep_till(time_to_sleep);
+	sleep_till(time_to_sleep, philosopher);
 	return (0);
 }

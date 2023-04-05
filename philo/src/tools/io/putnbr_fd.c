@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 20:44:25 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/09 01:01:42 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 19:35:30 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,13 @@ static int8_t	ft_putnbr_in_buf(long n, char *buf)
 	return (start);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(int n, int fd)
 {
 	char	buf[11];
 	int8_t	start;
 
 	if (n == 0)
-	{
-		write(fd, "0", 1);
-		return ;
-	}
+		return (write(fd, "0", 1));
 	else if (n < 0)
 	{
 		start = ft_putnbr_in_buf(-(long)n, buf);
@@ -43,5 +40,5 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		start = ft_putnbr_in_buf(n, buf);
-	write(fd, buf + start, 11 - start);
+	return (write(fd, buf + start, 11 - start));
 }

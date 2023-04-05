@@ -54,7 +54,7 @@ int	philosopher_eats(t_philosopher *philosopher)
 			philosopher->nb_of_times_to_eat--;
 		pthread_mutex_unlock(&philosopher->nb_of_times_to_eat_mutex);
 	}
-	sleep_till(time_to_eat);
+	sleep_till(time_to_eat, philosopher);
 	let_go_of_forks(philosopher);
 	return (0);
 }

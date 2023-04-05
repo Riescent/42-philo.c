@@ -161,6 +161,7 @@ SRC =\
 	philosopher/destroy_philosopher.c	\
 	philosopher/init_philosophers.c		\
 \
+	philosopher_routine/no_philosopher_died.c	\
 	philosopher_routine/philosopher_eats.c		\
 	philosopher_routine/philosopher_routine.c	\
 	philosopher_routine/philosopher_sleeps.c	\
@@ -194,7 +195,7 @@ DIR_BUILD =		.build/
 OBJS =			$(patsubst %.c, $(DIR_BUILD)%.o, $(SRC))
 DEPS =			$(patsubst %.c, $(DIR_BUILD)%.d, $(SRC))
 DEPS_FLAGS =	-MMD -MP
-CFLAGS =		-Wall -Wextra -Werror #-fsanitize=thread -g3
+CFLAGS =		-Wall -Wextra -Werror -O3 #-fsanitize=thread -g3
 RM =			rm -rf
 AR =			ar rcs
 
