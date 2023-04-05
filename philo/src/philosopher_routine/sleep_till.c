@@ -27,9 +27,7 @@ void	sleep_till(const struct timeval goal)
 	time_to_usleep = get_time_to_usleep(current_time, goal);
 	usleep(time_to_usleep * (time_to_usleep > 0));
 	while (timeval_compare(goal, current_time) > 0)  // TODO need to check if philosopher died
-	{
 		current_time = get_current_time();
-	}
 }
 
 long long	get_time_to_usleep(const struct timeval current_time,

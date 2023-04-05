@@ -32,7 +32,7 @@ void	*philosopher_routine(void *philosopher_void)
 	pthread_mutex_unlock(&philosopher->time_to_die_mutex);
 //	if (philosopher->args[NUMBER_OF_PHILOSOPHERS] % 2 == 0
 	if (philosopher->id % 2 == 0)
-		usleep(2000);
+		usleep(1000);
 	while (true)
 	{
 		if (philosopher_eats(philosopher) < 0)
@@ -43,6 +43,6 @@ void	*philosopher_routine(void *philosopher_void)
 				get_timestamp(philosopher, get_current_time()), philosopher)
 			< 0)
 			return (NULL);
-		usleep(300);
+		usleep(100);
 	}
 }
