@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:20:28 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:20:29 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/09 09:28:44 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void			run_philosopher(t_philosopher *philosophers);
 
 bool			no_philosophers_died(const t_philosopher *philosopher);
 void			*philosopher_routine(void *philosopher_void);
-int		print_state_change(const char *format, t_philosopher *philosopher);
-int 			philosopher_eats(t_philosopher *philosopher);
-int 			philosopher_sleeps(t_philosopher *philosopher);
-void			sleep_till(const struct timeval goal, const t_philosopher *philosopher);
+int				print_state_change(const char *format,
+					t_philosopher *philosopher);
+int				philosopher_eats(t_philosopher *philosopher);
+int				philosopher_sleeps(t_philosopher *philosopher);
+void			sleep_till(const struct timeval goal,
+					const t_philosopher *philosopher);
 
 t_philosopher	*init_philosophers(const int *args, bool *philosopher_died,
 					pthread_mutex_t	*philosopher_died_mutex);

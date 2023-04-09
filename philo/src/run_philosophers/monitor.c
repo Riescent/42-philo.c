@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 09:37:06 by vfries            #+#    #+#             */
+/*   Updated: 2023/04/09 10:11:16 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 
 #include "this_is_not_my_libft.h"
@@ -13,7 +25,7 @@ static void	stop_philosophers(t_philosopher *philosopher);
 void	start_monitoring(t_philosopher *philosophers)
 {
 	pthread_t		monitor;
-	int 			size;
+	int				size;
 
 	if (pthread_create(&monitor, NULL, &monitor_routine, philosophers) != 0)
 	{
@@ -27,10 +39,11 @@ void	start_monitoring(t_philosopher *philosophers)
 	while (size--)
 		pthread_join(philosophers[size].pthread, NULL);
 }
+
 static void	*monitor_routine(void *philosophers_void)
 {
 	const t_philosopher	*philosophers = philosophers_void;
-	struct timeval	tmp;
+	struct timeval		tmp;
 
 	tmp = get_current_time();
 	if (philosophers->args[TIME_TO_EAT] < philosophers->args[TIME_TO_DIE])
@@ -45,8 +58,8 @@ static void	*monitor_routine(void *philosophers_void)
 
 static bool	handle_philosopher_death(t_philosopher *philosophers)
 {
-	int	i;
-	int	times_to_eat_remaining;
+	int				i;
+	unsigned int	times_to_eat_remaining;
 
 	times_to_eat_remaining = 0;
 	i = philosophers->args[NUMBER_OF_PHILOSOPHERS];
@@ -56,12 +69,12 @@ static bool	handle_philosopher_death(t_philosopher *philosophers)
 		{
 			stop_philosophers(philosophers + i);
 			printf("%lli\t%i "RED"died\n"COLOR_RESET,
-					get_timestamp(philosophers + i, get_current_time()),
-					philosophers[i].id);
+				get_timestamp(philosophers + i, get_current_time()),
+				philosophers[i].id);
 			return (true);
 		}
 		pthread_mutex_lock(&philosophers[i].nb_of_times_to_eat_mutex);
-		times_to_eat_remaining += philosophers[i].nb_of_times_to_eat; // TODO could overflow
+		times_to_eat_remaining += philosophers[i].nb_of_times_to_eat != 0;
 		pthread_mutex_unlock(&philosophers[i].nb_of_times_to_eat_mutex);
 	}
 	if (times_to_eat_remaining == 0)

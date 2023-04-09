@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:05 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:15:06 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/09 09:45:04 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sleep_till(const struct timeval goal, const t_philosopher *philosopher)
 
 	current_time = get_current_time();
 	while (timeval_compare(goal, current_time) > 0
-			&& no_philosophers_died(philosopher))
+		&& no_philosophers_died(philosopher))
 	{
 		usleep(5);
 		current_time = get_current_time();

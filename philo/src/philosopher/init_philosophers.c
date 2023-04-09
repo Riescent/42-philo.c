@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:26 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:15:26 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/09 09:30:28 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	init_philosopher(t_philosopher	*philosopher, const int *args,
 	if (pthread_mutex_init(&philosopher->right_fork_mutex, NULL) != 0
 		|| pthread_mutex_init(&philosopher->time_to_die_mutex, NULL) != 0
 		|| pthread_mutex_init(&philosopher->nb_of_times_to_eat_mutex, NULL)
-			!= 0)
+		!= 0)
 	{
 		destroy_philosopher(philosopher);
 		return (-1);

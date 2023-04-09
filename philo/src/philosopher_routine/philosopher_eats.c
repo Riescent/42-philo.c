@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:16 by vfries            #+#    #+#             */
-/*   Updated: 2023/04/03 04:13:44 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/09 09:44:46 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,17 @@
 
 static int	take_forks(t_philosopher *philosopher);
 static int	take_fork(t_philosopher *philosopher, pthread_mutex_t *fork_mutex);
+static void	update_time_to_death_and_time_to_eat(t_philosopher *philosopher,
+				struct timeval *time_to_eat);
 static void	let_go_of_forks(t_philosopher *philosopher);
 
 int	philosopher_eats(t_philosopher *philosopher)
 {
-	struct timeval	current_time;
 	struct timeval	time_to_eat;
 
 	if (take_forks(philosopher))
-	{
-		let_go_of_forks(philosopher);
 		return (-1);
-	}
-	current_time = get_current_time();
-	time_to_eat = current_time;
-	pthread_mutex_lock(&philosopher->time_to_die_mutex);
-	philosopher->time_to_die = current_time;
-	timeval_add_ms(&philosopher->time_to_die, philosopher->args[TIME_TO_DIE]);
-	pthread_mutex_unlock(&philosopher->time_to_die_mutex);
-	timeval_add_ms(&time_to_eat, philosopher->args[TIME_TO_EAT]);
+	update_time_to_death_and_time_to_eat(philosopher, &time_to_eat);
 	if (print_state_change("%lli\t%i "GREEN"is eating\n"COLOR_RESET,
 			philosopher) < 0)
 	{
@@ -87,8 +79,27 @@ static int	take_forks(t_philosopher *philosopher)
 static int	take_fork(t_philosopher *philosopher, pthread_mutex_t *fork_mutex)
 {
 	pthread_mutex_lock(fork_mutex);
-	return (print_state_change(
-			"%lli\t%i "YELLOW"has taken a fork\n"COLOR_RESET, philosopher));
+	if (print_state_change(
+			"%lli\t%i "YELLOW"has taken a fork\n"COLOR_RESET, philosopher) < 0)
+	{
+		pthread_mutex_unlock(fork_mutex);
+		return (-1);
+	}
+	return (0);
+}
+
+static void	update_time_to_death_and_time_to_eat(t_philosopher *philosopher,
+				struct timeval *time_to_eat)
+{
+	struct timeval	current_time;
+
+	current_time = get_current_time();
+	*time_to_eat = current_time;
+	pthread_mutex_lock(&philosopher->time_to_die_mutex);
+	philosopher->time_to_die = current_time;
+	timeval_add_ms(&philosopher->time_to_die, philosopher->args[TIME_TO_DIE]);
+	pthread_mutex_unlock(&philosopher->time_to_die_mutex);
+	timeval_add_ms(time_to_eat, philosopher->args[TIME_TO_EAT]);
 }
 
 static void	let_go_of_forks(t_philosopher *philosopher)
