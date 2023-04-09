@@ -24,7 +24,7 @@ int	philosopher_sleeps(t_philosopher *philosopher)
 	struct timeval			time_to_sleep;
 
 	if (print_state_change("%lli\t%i "BLACK_HIGH_INTENSITY"is sleeping\n"COLOR_RESET,
-		get_timestamp(philosopher, current_time), philosopher) < 0)
+		philosopher) < 0)
 		return (-1);
 	time_to_sleep = current_time;
 	timeval_add_ms(&time_to_sleep, philosopher->args[TIME_TO_SLEEP]);

@@ -12,10 +12,9 @@
 
 #include <stdio.h>
 
-#include "philosophers.h"
+#include "philo_time.h"
 
-int	print_state_change(const char *format, const long long timestamp,
-			t_philosopher *philosopher)
+int	print_state_change(const char *format, t_philosopher *philosopher)
 {
 	pthread_mutex_lock(philosopher->philosopher_died_mutex);
 	if (*philosopher->philosopher_died)
@@ -23,7 +22,8 @@ int	print_state_change(const char *format, const long long timestamp,
 		pthread_mutex_unlock(philosopher->philosopher_died_mutex);
 		return (-1);
 	}
-	printf(format, timestamp, philosopher->id); // TODO take timestamp here
+	printf(format, get_timestamp(philosopher, get_current_time()),
+		philosopher->id);
 	pthread_mutex_unlock(philosopher->philosopher_died_mutex);
 	return (0);
 }

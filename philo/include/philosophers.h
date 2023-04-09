@@ -39,8 +39,7 @@ void			run_philosopher(t_philosopher *philosophers);
 
 bool			no_philosophers_died(const t_philosopher *philosopher);
 void			*philosopher_routine(void *philosopher_void);
-int				print_state_change(const char *format,
-					const long long timestamp, t_philosopher *philosopher);
+int		print_state_change(const char *format, t_philosopher *philosopher);
 int 			philosopher_eats(t_philosopher *philosopher);
 int 			philosopher_sleeps(t_philosopher *philosopher);
 void			sleep_till(const struct timeval goal, const t_philosopher *philosopher);

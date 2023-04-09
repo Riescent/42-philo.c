@@ -45,7 +45,7 @@ void	*philosopher_routine(void *philosopher_void)
 		if (philosopher_sleeps(philosopher) < 0)
 			return (NULL);
 		if (print_state_change("%lli\t%i "PURPLE"is thinking\n"COLOR_RESET,
-				get_timestamp(philosopher, get_current_time()), philosopher)
+				philosopher)
 			< 0)
 			return (NULL);
 		// usleep(100);

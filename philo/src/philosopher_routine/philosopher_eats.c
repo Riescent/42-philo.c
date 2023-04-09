@@ -21,7 +21,7 @@
 #include "philosophers.h"
 
 static int	take_forks(t_philosopher *philosopher);
-static int	print_has_taken_a_fork(t_philosopher *philosopher);
+static int	take_fork(t_philosopher *philosopher, pthread_mutex_t *fork_mutex);
 static void	let_go_of_forks(t_philosopher *philosopher);
 
 int	philosopher_eats(t_philosopher *philosopher)
@@ -42,7 +42,7 @@ int	philosopher_eats(t_philosopher *philosopher)
 	pthread_mutex_unlock(&philosopher->time_to_die_mutex);
 	timeval_add_ms(&time_to_eat, philosopher->args[TIME_TO_EAT]);
 	if (print_state_change("%lli\t%i "GREEN"is eating\n"COLOR_RESET,
-			get_timestamp(philosopher, current_time), philosopher) < 0)
+			philosopher) < 0)
 	{
 		let_go_of_forks(philosopher);
 		return (-1);
@@ -63,30 +63,32 @@ static int	take_forks(t_philosopher *philosopher)
 {
 	if (philosopher->id % 2)
 	{
-		pthread_mutex_lock(&philosopher->right_fork_mutex);
-		pthread_mutex_lock(philosopher->left_fork_mutex);
+		if (take_fork(philosopher, &philosopher->right_fork_mutex) < 0)
+			return (-1);
+		if (take_fork(philosopher, philosopher->left_fork_mutex) < 0)
+		{
+			pthread_mutex_unlock(&philosopher->right_fork_mutex);
+			return (-1);
+		}
 	}
 	else
 	{
-		pthread_mutex_lock(philosopher->left_fork_mutex);
-		pthread_mutex_lock(&philosopher->right_fork_mutex);
+		if (take_fork(philosopher, philosopher->left_fork_mutex) < 0)
+			return (-1);
+		if (take_fork(philosopher, &philosopher->right_fork_mutex) < 0)
+		{
+			pthread_mutex_unlock(philosopher->left_fork_mutex);
+			return (-1);
+		}
 	}
-	return (print_has_taken_a_fork(philosopher));
+	return (0);
 }
 
-static int	print_has_taken_a_fork(t_philosopher *philosopher)
+static int	take_fork(t_philosopher *philosopher, pthread_mutex_t *fork_mutex)
 {
-	struct timeval	current_time;
-	long long		timestamp;
-
-	current_time = get_current_time();
-	timestamp = get_timestamp(philosopher, current_time);
-	if (print_state_change("%lli\t%i "YELLOW"has taken a fork\n"COLOR_RESET,
-		timestamp, philosopher) < 0
-		|| print_state_change("%lli\t%i "YELLOW"has taken a fork\n"COLOR_RESET,
-		timestamp, philosopher) < 0)
-		return (-1);
-	return (0);
+	pthread_mutex_lock(fork_mutex);
+	return (print_state_change(
+			"%lli\t%i "YELLOW"has taken a fork\n"COLOR_RESET, philosopher));
 }
 
 static void	let_go_of_forks(t_philosopher *philosopher)
