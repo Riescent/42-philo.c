@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:14:57 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/16 07:14:58 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 18:38:00 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
-#include "this_is_not_my_libft.h"
+#include "tools.h"
 
 #include "philosophers.h"
 #include "arguments.h"

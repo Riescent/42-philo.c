@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:16 by vfries            #+#    #+#             */
-/*   Updated: 2023/04/09 09:44:46 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 18:38:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "tools/ft_colors.h"
+#include "tools.h"
 
 #include "arguments.h"
 #include "philo_time.h"

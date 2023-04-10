@@ -6,13 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 09:37:06 by vfries            #+#    #+#             */
-/*   Updated: 2023/04/09 10:11:16 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 18:38:00 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-#include "this_is_not_my_libft.h"
+#include "tools.h"
 
 #include "arguments.h"
 #include "philo_time.h"

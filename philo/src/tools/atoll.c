@@ -6,11 +6,11 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:19:01 by vfries            #+#    #+#             */
-/*   Updated: 2023/02/12 20:57:00 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 18:48:51 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_char.h"
+#include "tools.h"
 #include <limits.h>
 #include <stdbool.h>
 #include <sys/errno.h>

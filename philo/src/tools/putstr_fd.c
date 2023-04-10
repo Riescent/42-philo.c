@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstadd_front.c                                     :+:      :+:    :+:   */
+/*   putstr_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 15:31:47 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/09 01:02:31 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/10/12 20:39:01 by vfries            #+#    #+#             */
+/*   Updated: 2023/04/10 18:52:44 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_linked_list.h"
-#include <stddef.h>
+#include "tools.h"
+#include <unistd.h>
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+int	ft_putstr_fd(const char *s, int fd)
 {
-	if (lst == NULL || new == NULL)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	if (s == NULL)
+		return (-1);
+	return (write(fd, s, ft_strlen(s)));
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_colors.h                                        :+:      :+:    :+:   */
+/*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 21:40:00 by vfries            #+#    #+#             */
-/*   Updated: 2023/03/08 21:40:00 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/09/07 19:22:16 by vfries            #+#    #+#             */
+/*   Updated: 2023/04/10 18:52:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_COLORS_H
-# define FT_COLORS_H
+#ifndef TOOLS_H
+# define TOOLS_H
 
 # define BLACK "\001\e[0;30m\002"
 # define BLACK_HIGH_INTENSITY "\001\e[0;90m\002"
@@ -35,5 +35,16 @@
 # define WHITE "\001\e[0;37m\002"
 
 # define COLOR_RESET "\001\e[m\002"
+
+# include <unistd.h>
+
+int			ft_putstr_fd(const char *s, int fd);
+
+int			ft_isspace(int c);
+int			ft_isdigit(int c);
+
+long long	ft_atoll(const char *str);
+
+size_t		ft_strlen(const char *msg);
 
 #endif
