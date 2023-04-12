@@ -26,4 +26,6 @@ enum
 	NUMBER_OF_TIME_TO_EAT = 4,
 };
 
+# define INFINITE_EAT -1
+
 #endif //ARGUMENTS_H

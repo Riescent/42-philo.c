@@ -18,11 +18,12 @@
 #include "arguments.h"
 #include "philo_time.h"
 
-static void	init_philosopher_routine(t_philosopher *philosopher);
+static int	init_philosopher_routine(t_philosopher *philosopher);
 
 void	*philosopher_routine(void *philosopher)
 {
-	init_philosopher_routine(philosopher);
+	if (init_philosopher_routine(philosopher) < 0)
+		return (NULL);
 	while (true)
 	{
 		if (philosopher_eats(philosopher) < 0)
@@ -37,7 +38,7 @@ void	*philosopher_routine(void *philosopher)
 	}
 }
 
-static void	init_philosopher_routine(t_philosopher *philosopher)
+static int	init_philosopher_routine(t_philosopher *philosopher)
 {
 	struct timeval	tmp;
 
@@ -53,6 +54,11 @@ static void	init_philosopher_routine(t_philosopher *philosopher)
 	{
 		tmp = philosopher->start_time;
 		timeval_add_ms(&tmp, philosopher->args[TIME_TO_EAT] * 9 / 10);
+		if (print_state_change("%lli\t%i "PURPLE"is thinking\n"COLOR_RESET,
+			philosopher) < 0)
+			return (-1);
 		sleep_till(tmp, philosopher);
+		return (0);
 	}
+	return (0);
 }

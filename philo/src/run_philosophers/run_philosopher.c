@@ -29,6 +29,8 @@ void	run_philosopher(t_philosopher *philosophers)
 	int				size;
 	pthread_mutex_t	execution_lock;
 
+	if (philosophers->args[NUMBER_OF_PHILOSOPHERS] == 1)
+		return (run_single_philosopher(philosophers));
 	if (pthread_mutex_init(&execution_lock, NULL) != 0)
 	{
 		ft_putstr_fd("Failed to init execution_lock mutex\n", STDERR_FILENO);

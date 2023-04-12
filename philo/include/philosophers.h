@@ -36,6 +36,7 @@ typedef struct s_philosopher
 
 void			start_monitoring(t_philosopher *philosophers);
 void			run_philosopher(t_philosopher *philosophers);
+void			run_single_philosopher(t_philosopher *philosophers);
 
 bool			no_philosophers_died(const t_philosopher *philosopher);
 void			*philosopher_routine(void *philosopher_void);

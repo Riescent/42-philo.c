@@ -39,7 +39,7 @@ int	philosopher_eats(t_philosopher *philosopher)
 		let_go_of_forks(philosopher);
 		return (-1);
 	}
-	if (philosopher->args[NUMBER_OF_TIME_TO_EAT] != -1)
+	if (philosopher->args[NUMBER_OF_TIME_TO_EAT] != INFINITE_EAT)
 	{
 		pthread_mutex_lock(&philosopher->nb_of_times_to_eat_mutex);
 		if (philosopher->nb_of_times_to_eat > 0)

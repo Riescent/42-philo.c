@@ -15,8 +15,9 @@ SRC =\
 	philosopher_routine/sleep_till.c			\
 \
 \
-	run_philosophers/monitor.c			\
-	run_philosophers/run_philosopher.c	\
+	run_philosophers/monitor.c					\
+	run_philosophers/run_philosopher.c			\
+	run_philosophers/run_single_philosopher.c	\
 \
 \
 	tools/atoll.c		\

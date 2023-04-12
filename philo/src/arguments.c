@@ -56,6 +56,6 @@ int	fill_args(int argc, char **argv, int *args)
 		return (-1);
 	}
 	if (argc == 5)
-		args[NUMBER_OF_TIME_TO_EAT] = -1;
+		args[NUMBER_OF_TIME_TO_EAT] = INFINITE_EAT;
 	return (0);
 }
