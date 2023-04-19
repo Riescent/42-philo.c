@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_single_philosopher.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/19 14:55:20 by vfries            #+#    #+#             */
+/*   Updated: 2023/04/19 14:55:29 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 
 #include "tools.h"
@@ -15,7 +27,7 @@ void	run_single_philosopher(t_philosopher *philosophers)
 			philosophers) != 0)
 	{
 		ft_putstr_fd("Failed to create philosopher thread\n",
-				STDERR_FILENO);
+			STDERR_FILENO);
 		return ;
 	}
 	pthread_join(philosopher_thread, NULL);

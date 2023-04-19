@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 07:15:13 by vfries            #+#    #+#             */
-/*   Updated: 2023/04/10 18:40:04 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 14:55:59 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	init_philosopher_routine(t_philosopher *philosopher)
 		tmp = philosopher->start_time;
 		timeval_add_ms(&tmp, philosopher->args[TIME_TO_EAT] * 9 / 10);
 		if (print_state_change("%lli\t%i "PURPLE"is thinking\n"COLOR_RESET,
-			philosopher) < 0)
+				philosopher) < 0)
 			return (-1);
 		sleep_till(tmp, philosopher);
 		return (0);
